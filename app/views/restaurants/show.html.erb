@@ -1,0 +1,27 @@
+
+  <div class="blocks_show_page">
+    <div class="block restaurant">
+    <h1> <%= @restaurant.name.capitalize %></h1>
+      <p> <%= @restaurant.name.capitalize %> is a delicious <%= @restaurant.category %> restaurant.</p>
+      <h4>Useful infos:</h4>
+      <p>📍<%= @restaurant.address %></p>
+      <p>📞<%= @restaurant.phone_number %>.</p>
+
+      <h4>Reviews</h4>
+        <ul class="list-group">
+          <% @restaurant.reviews.each do |review| %>
+            <li class="list-group-item"><%= review.content %> - ⭐️ <%= review.rating %></li>
+          <% end %>
+        </ul>
+    <%= link_to "⬅ Back to restaurants list", restaurants_path %>
+    </div>
+
+    <div class="block review">
+    <h3>Add a new review to <%= @restaurant.name.capitalize %></h1>
+      <%= simple_form_for [@restaurant, @review] do |f| %>
+        <%= f.input :content %>
+        <%= f.input :rating %>
+        <%= f.submit "Submit review", class: "btn btn-primary" %>
+      <% end %>
+    </div>
+  </div>
